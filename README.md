@@ -6,7 +6,7 @@ A beginner-friendly Flutter application that demonstrates fundamental Flutter co
 
 - Browse products in a beautiful grid layout.
 - Tap a product to view detailed information.
-- Simulate adding products to a cart with a live counter in the AppBar.
+- Add products to a shopping cart with quantity controls and a full cart screen.
 - Smooth Hero animations between the product list and detail screens.
 - Clean, multi-file project structure with separated concerns.
 
@@ -67,5 +67,3 @@ flutter test
 | Home Screen | Product Detail |
 |-------------|----------------|
 | ![Home](screenshots/home.png) | ![Detail](screenshots/detail.png) |
-
-> Add your own screenshots to a `screenshots/` folder and update the paths above.
