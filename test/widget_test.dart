@@ -11,7 +11,7 @@ void main() {
       // Build the app.
       await tester.pumpWidget(const MyApp());
 
-      // Verify the home screen is shown with an empty cart badge.
+      // Verify the home screen is shown.
       expect(find.text('Product Catalog'), findsOneWidget);
 
       // Verify at least one product is rendered.
@@ -24,13 +24,12 @@ void main() {
       // Verify the detail screen shows an "Add to Cart" button.
       expect(find.text('Add to Cart'), findsOneWidget);
 
-      // Tap "Add to Cart".
+      // Tap "Add to Cart" and wait for the animation, snackbar, and auto-pop.
       await tester.tap(find.text('Add to Cart'));
       await tester.pumpAndSettle();
 
-      // Navigate back to the catalog.
-      await tester.tap(find.byType(BackButton));
-      await tester.pumpAndSettle();
+      // Verify we are back on the home screen.
+      expect(find.text('Product Catalog'), findsOneWidget);
 
       // Open the cart screen.
       await tester.tap(find.byIcon(Icons.shopping_cart));
@@ -39,7 +38,7 @@ void main() {
       // Verify the cart screen is displayed.
       expect(find.text('Shopping Cart'), findsOneWidget);
 
-      // Verify the item is in the cart and total is shown.
+      // Verify the checkout button is present.
       expect(find.text('Checkout'), findsOneWidget);
     },
   );
