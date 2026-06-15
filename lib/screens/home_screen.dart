@@ -60,14 +60,11 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 20,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: _FloatingCartButton(
-                itemCount: itemCount,
-                onPressed: () => onNavigateToCart(context),
-              ),
+            bottom: 24,
+            right: 24,
+            child: _FloatingCartButton(
+              itemCount: itemCount,
+              onPressed: () => onNavigateToCart(context),
             ),
           ),
         ],
@@ -98,8 +95,8 @@ class _FloatingCartButton extends StatelessWidget {
         customBorder: const CircleBorder(),
         onTap: onPressed,
         child: Container(
-          width: 56,
-          height: 56,
+          width: 64,
+          height: 64,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
           ),
@@ -108,6 +105,7 @@ class _FloatingCartButton extends StatelessWidget {
             children: [
               Icon(
                 Icons.shopping_cart,
+                size: 28,
                 color: theme.colorScheme.onPrimary,
               ),
               if (itemCount > 0)
