@@ -32,6 +32,19 @@ class ProductDetailScreen extends StatelessWidget {
                 product.imageUrl,
                 height: 300,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 300,
+                    color: Colors.grey.shade200,
+                    child: const Center(
+                      child: Icon(
+                        Icons.image_not_supported_outlined,
+                        color: Colors.grey,
+                        size: 64,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             Padding(
