@@ -28,8 +28,8 @@ class ProductDetailScreen extends StatelessWidget {
           children: [
             Hero(
               tag: 'product-image-${product.id}',
-              child: Image.network(
-                product.imageUrl,
+              child: Image.asset(
+                product.imageAsset,
                 height: 300,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
