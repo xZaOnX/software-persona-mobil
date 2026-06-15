@@ -37,24 +37,92 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Product Catalog'),
         centerTitle: true,
-        actions: [
-          Stack(
+      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+              ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return ProductCard(
+                  product: product,
+                  onTap: () => _navigateToDetail(context, product),
+                );
+              },
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: _FloatingCartButton(
+                itemCount: itemCount,
+                onPressed: () => onNavigateToCart(context),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// A small circular floating cart button with a quantity badge.
+class _FloatingCartButton extends StatelessWidget {
+  final int itemCount;
+  final VoidCallback onPressed;
+
+  const _FloatingCartButton({
+    required this.itemCount,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Material(
+      elevation: 6,
+      shape: const CircleBorder(),
+      color: theme.colorScheme.primary,
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onPressed,
+        child: Container(
+          width: 56,
+          height: 56,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+          ),
+          child: Stack(
             alignment: Alignment.center,
             children: [
-              IconButton(
-                icon: const Icon(Icons.shopping_cart),
-                tooltip: 'Cart',
-                onPressed: () => onNavigateToCart(context),
+              Icon(
+                Icons.shopping_cart,
+                color: theme.colorScheme.onPrimary,
               ),
               if (itemCount > 0)
                 Positioned(
-                  right: 4,
-                  top: 4,
+                  right: 8,
+                  top: 8,
                   child: Container(
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.error,
+                      color: theme.colorScheme.error,
                       shape: BoxShape.circle,
+                      border: Border.all(
+                        color: theme.colorScheme.primary,
+                        width: 1.5,
+                      ),
                     ),
                     constraints: const BoxConstraints(
                       minWidth: 18,
@@ -73,25 +141,6 @@ class HomeScreen extends StatelessWidget {
                 ),
             ],
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.75,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-          ),
-          itemCount: products.length,
-          itemBuilder: (context, index) {
-            final product = products[index];
-            return ProductCard(
-              product: product,
-              onTap: () => _navigateToDetail(context, product),
-            );
-          },
         ),
       ),
     );
