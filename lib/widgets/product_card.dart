@@ -32,8 +32,8 @@ class ProductCard extends StatelessWidget {
             Expanded(
               child: Hero(
                 tag: 'product-image-${product.id}',
-                child: Image.network(
-                  product.imageUrl,
+                child: Image.asset(
+                  product.imageAsset,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
